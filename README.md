@@ -6,6 +6,8 @@ to have an overview of individual projects.
 
 Projects have their tasks and assigned employees.
 
+This application is written in javascript in Vue.js framework.
+
  
 I learned a lot while developing this app. For example, 
 
