@@ -36,6 +36,8 @@ The whole design of the app and some parts of the code is my own work.
 
 
 
+
+
 ## Project setup
 ```
 npm install
