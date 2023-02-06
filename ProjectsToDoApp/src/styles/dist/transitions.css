@@ -1,0 +1,28 @@
+.roll-down-enter-from,
+.roll-down-leave-to {
+  transform: scaleY(0);
+}
+.roll-down-enter-to,
+.roll-down-leave-from {
+  transform: scaleY(1);
+}
+.roll-down-enter-active,
+.roll-down-leave-active {
+  transition: transform 0.3s ease;
+  transform-origin: top;
+}
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(-1rem);
+  opacity: 0;
+}
+.slide-right-enter-to,
+.slide-right-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.3s ease;
+  transform-origin: left;
+}
