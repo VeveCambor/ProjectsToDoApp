@@ -1,47 +1,47 @@
 <template>
-  <t-page
-    title="Projects"
-    addButtonLabel="add project"
-    addButtonRedirect="/project-form"
-    :loading="loading"
-    img="projects.png"
-  >
-    <template v-slot:content>
-
-      <p v-if="!projects.length">there are no projects in the database yet</p>
-      <template v-else>
-        <t-accordeon v-for="project in projectsToDisplay" :key="project.id"
-          :title="project.project + ' (' + project.tasks.filter(task => task.completed).length + '/' + project.tasks.length + ')'">
-          <template v-slot:content>
-            <div class="page-btn-container">
-              <t-button label="detail" small-size @clicked="$router.push('/project/' + project.id)" />
-              <t-button label="edit" small-size @clicked="$router.push('/project-form/' + project.id)" />
-              <t-button v-if="!project.tasks.length" label="delete" small-size @clicked="onDeleteClicked(project)" />
-              <t-button label="add task" small-size @clicked="$router.push('/task-form-project/' + project.id)" />
-            </div>
-            <p v-if="!project.tasks.length" class="no-data-message">there are no tasks in the project</p>
-            <t-list v-else :items="project.tasks" display-icons />
-          </template>
-        </t-accordeon>
+  <div>
+    <t-page
+      title="Projects"
+      addButtonLabel="add project"
+      addButtonRedirect="/project-form"
+      :loading="loading"
+      img="projects.png"
+    >
+      <template v-slot:content>
+        <p v-if="!projects.length">there are no projects in the database yet</p>
+        <div v-else>
+          <t-accordeon v-for="project in projectsToDisplay" :key="project.id"
+            :title="project.project + ' (' + project.tasks.filter(task => task.completed).length + '/' + project.tasks.length + ')'">
+            <template v-slot:content>
+              <div class="page-btn-container">
+                <t-button label="detail" small-size @clicked="$router.push('/project/' + project.id)" />
+                <t-button label="edit" small-size @clicked="$router.push('/project-form/' + project.id)" />
+                <t-button v-if="!project.tasks.length" label="delete" small-size @clicked="onDeleteClicked(project)" />
+                <t-button label="add task" small-size @clicked="$router.push('/task-form-project/' + project.id)" />
+              </div>
+              <p v-if="!project.tasks.length" class="no-data-message">there are no tasks in the project</p>
+              <t-list v-else :items="project.tasks" display-icons />
+            </template>
+          </t-accordeon>
+        </div>
       </template>
-
-    </template>
-  </t-page>
-  <t-modal
-    :show="showDeleteModal"
-    title="confirm delete"
-    ok-button-label="delete"
-    cancel-button-label="cancel"
-    @close-me="closeDeleteModal"
-    @ok-clicked="deleteProject"
-    @cancel-clicked="closeDeleteModal"
-  >
-    <div>
-      <span>Do you really want to delete project </span>
-      <strong>{{ projectToDelete.project }}</strong>
-      <span> ?</span>
-    </div>
-  </t-modal>
+    </t-page>
+    <t-modal
+      :show="showDeleteModal"
+      title="confirm delete"
+      ok-button-label="delete"
+      cancel-button-label="cancel"
+      @close-me="closeDeleteModal"
+      @ok-clicked="deleteProject"
+      @cancel-clicked="closeDeleteModal"
+    >
+      <div>
+        <span>Do you really want to delete project </span>
+        <strong>{{ projectToDelete.project }}</strong>
+        <span> ?</span>
+      </div>
+    </t-modal>
+  </div>
 </template>
 
 <script>

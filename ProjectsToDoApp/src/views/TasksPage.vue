@@ -1,44 +1,46 @@
 <template>
-  <t-page
-    title="Tasks"
-    addButtonLabel="add task"
-    addButtonRedirect="/task-form"
-    :loading="loading"
-    img="tasks.png"
-  >
-    <template v-slot:content>
-      <t-accordeon
-        v-for="task in tasksToDisplay"
-        :key="task.id"
-        :title="task.task + ' (' + task.project + ')'"
-      >
-        <template v-slot:content>
-          <div class="task-info-row">
-            <div class="task-icon">
-              <t-icon :icon="task.icon" />
+  <div>
+    <t-page
+      title="Tasks"
+      addButtonLabel="add task"
+      addButtonRedirect="/task-form"
+      :loading="loading"
+      img="tasks.png"
+    >
+      <template v-slot:content>
+        <t-accordeon
+          v-for="task in tasksToDisplay"
+          :key="task.id"
+          :title="task.task + ' (' + task.project + ')'"
+        >
+          <template v-slot:content>
+            <div class="task-info-row">
+              <div class="task-icon">
+                <t-icon :icon="task.icon" />
+              </div>
+              <div class="task-date">
+                {{ formatDate(task.date) }}
+              </div>
+              <div class="page-btn-container tasks-btn-container">
+                <t-button label="detail" small-size @clicked="$router.push('/task/' + task.id)" />
+                <t-button label="edit" small-size @clicked="$router.push('/task-form/' + task.id)" />
+                <t-button v-if="!task.persons.length" label="delete" small-size @clicked="onDeleteClicked(task)" />
+              </div>
             </div>
-            <div class="task-date">
-              {{ formatDate(task.date) }}
-            </div>
-            <div class="page-btn-container tasks-btn-container">
-              <t-button label="detail" small-size @clicked="$router.push('/task/' + task.id)" />
-              <t-button label="edit" small-size @clicked="$router.push('/task-form/' + task.id)" />
-              <t-button v-if="!task.persons.length" label="delete" small-size @clicked="onDeleteClicked(task)" />
-            </div>
-          </div>
-          <t-list :items="task.persons" />
-        </template>
-      </t-accordeon>
-    </template>
-  </t-page>
-  <t-modal :show="showDeleteModal" title="confirm delete" ok-button-label="delete" cancel-button-label="cancel"
-    @close-me="closeDeleteModal" @ok-clicked="deleteTask" @cancel-clicked="closeDeleteModal">
-    <div>
-      <span>Do you really want to delete task </span>
-      <strong>{{ taskToDelete.task }}</strong>
-      <span> ?</span>
-    </div>
-  </t-modal>
+            <t-list :items="task.persons" />
+          </template>
+        </t-accordeon>
+      </template>
+    </t-page>
+    <t-modal :show="showDeleteModal" title="confirm delete" ok-button-label="delete" cancel-button-label="cancel"
+      @close-me="closeDeleteModal" @ok-clicked="deleteTask" @cancel-clicked="closeDeleteModal">
+      <div>
+        <span>Do you really want to delete task </span>
+        <strong>{{ taskToDelete.task }}</strong>
+        <span> ?</span>
+      </div>
+    </t-modal>
+  </div>
 </template>
 
 <script>

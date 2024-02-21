@@ -10,18 +10,20 @@
     >
       <div>The form is not valid.</div>
     </t-modal>
-    <template v-for="control in controls" :key="control">
-      <t-input
-        :control="control"
-        :settings="settings[control]"
-        :error="formData[control].error"
-        :error-message="formData[control].errorMessage"
-        @changed="onChanged"
-        @focused="onFocused"
-        @blured="onBlured"
-        @add-new="onAddNew"
-      />
-    </template>
+    <div>
+      <div v-for="control in controls" :key="control">
+        <t-input
+          :control="control"
+          :settings="settings[control]"
+          :error="formData[control].error"
+          :error-message="formData[control].errorMessage"
+          @changed="onChanged"
+          @focused="onFocused"
+          @blured="onBlured"
+          @add-new="onAddNew"
+        />
+      </div>
+    </div>
     <t-button class="submit-button" label="submit" btn-type="submit" />
   </form>
 </template>

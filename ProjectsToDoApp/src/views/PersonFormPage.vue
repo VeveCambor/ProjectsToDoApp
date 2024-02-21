@@ -1,34 +1,36 @@
 <template>
-  <t-page
-    :title="title"
-    :loading="loading"
-    displayBackButton
-  >
-    <template v-slot:content>
-      <t-form
-        v-if="!loading"
-        :settings="settings"
-        @submited="onSubmited"
-        @add-new="onAddNew" />
-    </template>
-  </t-page>
-  <t-modal
-    :show="showAddNewModal"
-    title="add position"
-    ok-button-label="submit"
-    @close-me="closeAddNewModal"
-    @cancel-clicked="closeAddNewModal"
-    @ok-clicked="addPosition"
-  >
-    <div>
-      <t-input
-        control="addNewPosition"
-        :settings="addNewPositionSettings"
-        @changed="onAddNewPositionChanged"
-      />
-    </div>
+  <div>
+    <t-page
+      :title="title"
+      :loading="loading"
+      displayBackButton
+    >
+      <template v-slot:content>
+        <t-form
+          v-if="!loading"
+          :settings="settings"
+          @submited="onSubmited"
+          @add-new="onAddNew" />
+      </template>
+    </t-page>
+    <t-modal
+      :show="showAddNewModal"
+      title="add position"
+      ok-button-label="submit"
+      @close-me="closeAddNewModal"
+      @cancel-clicked="closeAddNewModal"
+      @ok-clicked="addPosition"
+    >
+      <div>
+        <t-input
+          control="addNewPosition"
+          :settings="addNewPositionSettings"
+          @changed="onAddNewPositionChanged"
+        />
+      </div>
 
-  </t-modal>
+    </t-modal>
+  </div>
 </template>
 
 <script>

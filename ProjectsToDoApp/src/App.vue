@@ -1,11 +1,13 @@
 <template>
-  <t-nav-bar :links="navbarLinks" />
-  <error-page v-if="error" />
-  <template v-else>
-    <!-- <transition name="fadeout"> -->
-      <router-view />
-    <!-- </transition> -->
-  </template>
+  <div>
+    <t-nav-bar :links="navbarLinks" />
+    <error-page v-if="error" />
+    <div v-else>
+      <!-- <transition name="fadeout"> -->
+        <router-view />
+      <!-- </transition> -->
+    </div>
+  </div>
 </template>
 
 <script>

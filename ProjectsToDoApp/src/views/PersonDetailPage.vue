@@ -1,51 +1,53 @@
 <template>
-  <t-page
-    :loading="loading"
-    :title="person ? person.last + ' ' + person.first + ' (' + person.position + ')' : ''"
-  >
-    <template v-slot:content>
-      <div class="top-buttons">
-        <t-button label="edit" @clicked="onEditButtonClicked" />
-        <t-button label="add task" @clicked="onAddTaskClicked" />
-        <t-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
-      </div>
+  <div>
+    <t-page
+      :loading="loading"
+      :title="person ? person.last + ' ' + person.first + ' (' + person.position + ')' : ''"
+    >
+      <template v-slot:content>
+        <div class="top-buttons">
+          <t-button label="edit" @clicked="onEditButtonClicked" />
+          <t-button label="add task" @clicked="onAddTaskClicked" />
+          <t-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
+        </div>
+        <div>
+          <t-list
+            :items="tasksToDisplay"
+            display-icons
+            @clicked="onItemButtonClicked"
+          />
+        </div>
+      </template>
+    </t-page>
+    <t-modal
+      :show="showDeleteModal"
+      title="confirm delete"
+      ok-button-label="delete"
+      @close-me="closeDeleteModal"
+      @ok-clicked="deletePerson"
+      @cancel-clicked="closeDeleteModal"
+    >
       <div>
-        <t-list
-          :items="tasksToDisplay"
-          display-icons
-          @clicked="onItemButtonClicked"
-        />
+        <span>do you really want to delete </span>
+        <strong>{{ person.last + ' ' + person.first }}</strong>
+        <span> ?</span>
       </div>
-    </template>
-  </t-page>
-  <t-modal
-    :show="showDeleteModal"
-    title="confirm delete"
-    ok-button-label="delete"
-    @close-me="closeDeleteModal"
-    @ok-clicked="deletePerson"
-    @cancel-clicked="closeDeleteModal"
-  >
-    <div>
-      <span>do you really want to delete </span>
-      <strong>{{ person.last + ' ' + person.first }}</strong>
-      <span> ?</span>
-    </div>
-  </t-modal>
-  <t-modal
-    :show="showAddTaskModal"
-    title="add task"
-    ok-button-label="submit"
-    @close-me="closeAddTaskModal"
-    @cancel-clicked="closeAddTaskModal"
-    @ok-clicked="addTask">
-    <div>
-      <t-input
-        control="addTask"
-        :settings="addTaskSettings"
-        @changed="onAddTaskChanged" />
-    </div>
-  </t-modal>
+    </t-modal>
+    <t-modal
+      :show="showAddTaskModal"
+      title="add task"
+      ok-button-label="submit"
+      @close-me="closeAddTaskModal"
+      @cancel-clicked="closeAddTaskModal"
+      @ok-clicked="addTask">
+      <div>
+        <t-input
+          control="addTask"
+          :settings="addTaskSettings"
+          @changed="onAddTaskChanged" />
+      </div>
+    </t-modal>
+  </div>
 </template>
 
 <script>

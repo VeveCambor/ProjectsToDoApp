@@ -1,38 +1,46 @@
 <template>
+  <div>
+    <t-nav-bar :links="navbarLinks" />
+    <error-page v-if="error" />
+    <div v-else>
+      <transition name="fadeout">
+        <router-view />
+      </transition>
+    </div>
   <t-page
     :title="project ? project.project : ''"
     :loading="loading"
   >
-    <template v-slot:content>
-      <div class="top-buttons">
-        <t-button label="edit" @clicked="onEditButtonClicked"/>
-        <t-button label="add task" @clicked="onAddTaskButtonClicked"/>
-        <t-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
-      </div>
+      <template v-slot:content>
+        <div class="top-buttons">
+          <t-button label="edit" @clicked="onEditButtonClicked"/>
+          <t-button label="add task" @clicked="onAddTaskButtonClicked"/>
+          <t-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
+        </div>
+        <div>
+          <t-list
+            :items="tasksToDisplay"
+            display-icons
+            @clicked="onItemButtonClicked"
+          />
+        </div>
+      </template>
+    </t-page>
+    <t-modal
+      :show="showDeleteModal"
+      title="confirm delete"
+      ok-button-label="delete"
+      @close-me="closeDeleteModal"
+      @ok-clicked="deleteProject"
+      @cancel-clicked="closeDeleteModal"
+    >
       <div>
-        <t-list
-          :items="tasksToDisplay"
-          display-icons
-          @clicked="onItemButtonClicked"
-        />
+        <span>do you really want to delete project </span>
+        <strong>{{ project.project }}</strong>
+        <span> ?</span>
       </div>
-    </template>
-  </t-page>
-  <t-modal
-    :show="showDeleteModal"
-    title="confirm delete"
-    ok-button-label="delete"
-    @close-me="closeDeleteModal"
-    @ok-clicked="deleteProject"
-    @cancel-clicked="closeDeleteModal"
-  >
-    <div>
-      <span>do you really want to delete project </span>
-      <strong>{{ project.project }}</strong>
-      <span> ?</span>
-    </div>
-  </t-modal>
-
+    </t-modal>
+  </div>
 </template>
 
 <script>

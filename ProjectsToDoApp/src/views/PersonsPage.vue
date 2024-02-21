@@ -1,43 +1,45 @@
 <template>
-  <t-page
-    title="Persons"
-    addButtonLabel="add person"
-    addButtonRedirect="/person-form"
-    img="persons.png"
-    :loading="loading"
-  >
-    <template v-slot:content>
-      <t-accordeon
-        v-for="person in personsToDisplay"
-        :key="person.id"
-        :title="person.fullName + ' (' + person.position + ')'"
-      >
+  <div>
+    <t-page
+      title="Persons"
+      addButtonLabel="add person"
+      addButtonRedirect="/person-form"
+      img="persons.png"
+      :loading="loading"
+    >
         <template v-slot:content>
-          <div class="page-btn-container tasks-btn-container">
-            <t-button label="detail" small-size @clicked="$router.push('/person/' + person.id)" />
-            <t-button label="edit" small-size @clicked="$router.push('/person-form/' + person.id)" />
-            <t-button v-if="!person.tasks.length" label="delete" small-size @clicked="onDeleteClicked(person)" />
-          </div>
-          <t-list :items="person.tasks" display-icons />
-        </template>
-      </t-accordeon>
-      <!-- <t-button label="generate error" @click="errorBtn" /> -->
-    </template>
-  </t-page>
-  <t-modal
-    :show="showDeleteModal"
-    title="confirm delete"
-    ok-button-label="delete"
-    cancel-button-label="cancel"
-    @close-me="closeDeleteModal"
-    @ok-clicked="deletePerson"
-    @cancel-clicked="closeDeleteModal">
-    <div>
-      <span>Do you really want to delete </span>
-      <strong>{{ personToDelete.fullName }}</strong>
-      <span> ?</span>
-    </div>
-  </t-modal>
+          <t-accordeon
+            v-for="person in personsToDisplay"
+            :key="person.id"
+            :title="person.fullName + ' (' + person.position + ')'"
+          >
+          <template v-slot:content>
+            <div class="page-btn-container tasks-btn-container">
+              <t-button label="detail" small-size @clicked="$router.push('/person/' + person.id)" />
+              <t-button label="edit" small-size @clicked="$router.push('/person-form/' + person.id)" />
+              <t-button v-if="!person.tasks.length" label="delete" small-size @clicked="onDeleteClicked(person)" />
+            </div>
+            <t-list :items="person.tasks" display-icons />
+          </template>
+        </t-accordeon>
+        <!-- <t-button label="generate error" @click="errorBtn" /> -->
+      </template>
+    </t-page>
+    <t-modal
+      :show="showDeleteModal"
+      title="confirm delete"
+      ok-button-label="delete"
+      cancel-button-label="cancel"
+      @close-me="closeDeleteModal"
+      @ok-clicked="deletePerson"
+      @cancel-clicked="closeDeleteModal">
+      <div>
+        <span>Do you really want to delete </span>
+        <strong>{{ personToDelete.fullName }}</strong>
+        <span> ?</span>
+      </div>
+    </t-modal>
+  </div>
 </template>
 
 <script>
