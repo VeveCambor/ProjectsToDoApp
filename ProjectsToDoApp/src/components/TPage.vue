@@ -14,7 +14,7 @@
     <div v-else>
       <slot name="content"></slot>
       <div v-if="displayBackButton" class="back-button-container">
-        <t-button label="back" @click="$router.go(-1)" />
+        <s-button label="back" @click="$router.go(-1)" />
       </div>
     </div>
 
@@ -25,6 +25,7 @@
 
 import TLoading from './TLoading.vue'
 import TButton from './TButton.vue'
+import SButton from './SButton.vue'
 
 export default {
   name: 'TPage',
@@ -44,7 +45,7 @@ export default {
       return require('../assets/img/' + pic)
     }
   },
-  components: { TLoading, TButton }
+  components: { TLoading, TButton, SButton }
 }
 
 

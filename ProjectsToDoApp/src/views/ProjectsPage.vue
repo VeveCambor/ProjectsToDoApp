@@ -127,7 +127,7 @@ export default {
       })
     }
   },
-  components: { TAccordeon, TList, TButton, TPage, TModal }
+  components: { TAccordeon, TList, TButton, TPage, TModal,}
 }
 
 </script>

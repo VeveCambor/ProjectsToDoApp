@@ -6,7 +6,7 @@
     >
       <template v-slot:content>
         <div class="top-buttons">
-          <t-button label="edit" @clicked="onEditButtonClicked" />
+          <s-button label="edit" @clicked="onEditButtonClicked" />
           <t-button label="add task" @clicked="onAddTaskClicked" />
           <t-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
         </div>
@@ -56,6 +56,7 @@ import { isPast, formatDate } from '@/helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
 import TPage from '@/components/TPage.vue'
 import TButton from '@/components/TButton.vue'
+import SButton from '@/components/SButton.vue'
 import TModal from '@/components/TModal.vue'
 import TList from '@/components/TList.vue'
 import TInput from '@/components/form/TInput.vue'
@@ -189,7 +190,7 @@ export default {
       })
     }
   },
-  components: { TPage, TButton, TModal, TList, TInput }
+  components: { TPage, TButton, TModal, TList, TInput, SButton}
 }
 
 </script>

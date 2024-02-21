@@ -6,7 +6,7 @@
     >
       <template v-slot:content>
         <div class="top-buttons">
-          <t-button label="edit" @clicked="onEditButtonClicked" />
+          <s-button label="edit" @clicked="onEditButtonClicked" />
           <t-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
           <t-button label="add person" @clicked="onAddPersonClicked" />
         </div>
@@ -55,6 +55,7 @@
 import db from '../helpers/db.js'
 import TPage from '../components/TPage.vue'
 import TButton from '../components/TButton.vue'
+import SButton from '../components/SButton.vue'
 import TModal from '../components/TModal.vue'
 import TList from '../components/TList.vue'
 import TInput from '../components/form/TInput.vue'
@@ -185,7 +186,7 @@ export default {
       this.personToAdd = payload.value
     }
   },
-  components: { TPage, TButton, TModal, TList, TInput }
+  components: { TPage, TButton, TModal, TList, TInput, SButton }
 }
 
 </script>
