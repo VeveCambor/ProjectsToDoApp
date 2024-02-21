@@ -37,7 +37,7 @@ export default {
 button
   background: $primary
   color: $secondary
-  padding: .4em .8em
+  padding: .7em 2em
   transition: all .3s ease
   border-radius: $border-radius
   font-size: 1.2rem
