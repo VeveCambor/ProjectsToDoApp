@@ -1,6 +1,6 @@
 <template>
   <t-page
-    title="Welcome :-)"
+    title="PROJECTS TO DO APP"
     :loading="loading"
   >
     <template v-slot:content>
@@ -98,23 +98,25 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../styles/variables.styl'
+  
 ul
   list-style-type: none
   margin: auto
   margin-top: 6rem
   padding: 0
-  width: 80%
-  max-width: 400px
-  border: 1px solid #cdcdcd
+  width: 100%
+  max-width: 800px
+  height: auto
   border-radius: $border-radius
   overflow: hidden
   box-shadow: $box-shadow
   & li
-    padding: .4em .8em
+    padding: 1.2em 1.6em
+    font-weight: bold
     &:not(:last-child)
       border-bottom: 1px solid #efefef
     &:first-child
-      font-weight: bold
+      font-size: 1.3rem
       background: lighten($secondary, 60%)
     &:not(:first-child)
       display: flex

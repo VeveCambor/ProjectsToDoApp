@@ -60,7 +60,7 @@ body
 
 .page-btn-container
   display: flex
-  justify-content: flex-end
+  justify-content: center
   align-items: center
   padding: $list-items-padding
   border-bottom: 1px solid #efefef
@@ -71,6 +71,9 @@ body
 
 .no-data-message
   padding-bottom: 1rem
+
+
+
 
 // .fadeout-enter-from, .fadeout-leave-to
 //   opacity: 0
