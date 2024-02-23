@@ -1,5 +1,5 @@
 <template>
-  <t-page
+  <v-page
     title="PROJECTS TO DO APP"
     :loading="loading"
   >
@@ -34,14 +34,14 @@
         </ul>
       </div>
     </template>
-  </t-page>
+  </v-page>
 
 </template>
 
 <script>
 import db from '../helpers/db.js'
 import { isPast } from '../helpers/dateFunctions.js'
-import TPage from '@/components/TPage.vue'
+import VPage from '@/components/VPage.vue'
 
 export default {
   name: 'WelcomePage',
@@ -91,7 +91,7 @@ export default {
       this.loading = false
     })
   },
-  components: {TPage }
+  components: { VPage }
 }
 
 </script>

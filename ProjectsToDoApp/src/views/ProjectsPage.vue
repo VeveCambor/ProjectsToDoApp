@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-page
+    <v-page
       title="Projects"
       addButtonLabel="add project"
       addButtonRedirect="/project-form"
@@ -10,23 +10,23 @@
       <template v-slot:content>
         <p v-if="!projects.length">there are no projects in the database yet</p>
         <div v-else>
-          <t-accordeon v-for="project in projectsToDisplay" :key="project.id"
+          <v-accordeon v-for="project in projectsToDisplay" :key="project.id"
             :title="project.project + ' (' + project.tasks.filter(task => task.completed).length + '/' + project.tasks.length + ')'">
             <template v-slot:content>
               <div class="page-btn-container">
-                <t-button label="detail" small-size @clicked="$router.push('/project/' + project.id)" />
-                <t-button label="edit" small-size @clicked="$router.push('/project-form/' + project.id)" />
-                <t-button v-if="!project.tasks.length" label="delete" small-size @clicked="onDeleteClicked(project)" />
-                <t-button label="add task" small-size @clicked="$router.push('/task-form-project/' + project.id)" />
+                <v-button label="detail" small-size @clicked="$router.push('/project/' + project.id)" />
+                <v-button label="edit" small-size @clicked="$router.push('/project-form/' + project.id)" />
+                <v-button v-if="!project.tasks.length" label="delete" small-size @clicked="onDeleteClicked(project)" />
+                <v-button label="add task" small-size @clicked="$router.push('/task-form-project/' + project.id)" />
               </div>
               <p v-if="!project.tasks.length" class="no-data-message">there are no tasks in the project</p>
-              <t-list v-else :items="project.tasks" display-icons />
+              <v-list v-else :items="project.tasks" display-icons />
             </template>
-          </t-accordeon>
+          </v-accordeon>
         </div>
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showDeleteModal"
       title="confirm delete"
       ok-button-label="delete"
@@ -40,7 +40,7 @@
         <strong>{{ projectToDelete.project }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
@@ -49,11 +49,11 @@
 import db from '../helpers/db.js'
 import { formatDate, isPast } from '../helpers/dateFunctions.js'
 import { sortingTasks  } from '@/helpers/sorting.js'
-import TAccordeon from '../components/TAccordeon.vue'
-import TList from '../components/TList.vue'
-import TButton from '../components/TButton.vue'
-import TPage from '../components/TPage.vue'
-import TModal from '../components/TModal.vue'
+import VAccordeon from '../components/VAccordeon.vue'
+import VList from '../components/VList.vue'
+import VButton from '../components/VButton.vue'
+import VPage from '../components/VPage.vue'
+import VModal from '../components/VModal.vue'
 
 export default {
   name: 'ProjectsPage',
@@ -127,7 +127,7 @@ export default {
       })
     }
   },
-  components: { TAccordeon, TList, TButton, TPage, TModal,}
+  components: { VAccordeon, VList, VButton, VPage, VModal,}
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-page
+    <v-page
       title="Persons"
       addButtonLabel="add person"
       addButtonRedirect="/person-form"
@@ -8,24 +8,24 @@
       :loading="loading"
     >
         <template v-slot:content>
-          <t-accordeon
+          <v-accordeon
             v-for="person in personsToDisplay"
             :key="person.id"
             :title="person.fullName + ' (' + person.position + ')'"
           >
           <template v-slot:content>
             <div class="page-btn-container tasks-btn-container">
-              <t-button label="detail" small-size @clicked="$router.push('/person/' + person.id)" />
-              <t-button label="edit" small-size @clicked="$router.push('/person-form/' + person.id)" />
-              <t-button v-if="!person.tasks.length" label="delete" small-size @clicked="onDeleteClicked(person)" />
+              <v-button label="detail" small-size @clicked="$router.push('/person/' + person.id)" />
+              <v-button label="edit" small-size @clicked="$router.push('/person-form/' + person.id)" />
+              <v-button v-if="!person.tasks.length" label="delete" small-size @clicked="onDeleteClicked(person)" />
             </div>
-            <t-list :items="person.tasks" display-icons />
+            <v-list :items="person.tasks" display-icons />
           </template>
-        </t-accordeon>
+        </v-accordeon>
         <!-- <t-button label="generate error" @click="errorBtn" /> -->
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showDeleteModal"
       title="confirm delete"
       ok-button-label="delete"
@@ -38,7 +38,7 @@
         <strong>{{ personToDelete.fullName }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
@@ -47,11 +47,11 @@
 import db from '../helpers/db.js'
 import { formatDate, isPast } from '../helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
-import TButton from '../components/TButton.vue'
-import TAccordeon from '../components/TAccordeon.vue'
-import TList from '../components/TList.vue'
-import TPage from '../components/TPage.vue'
-import TModal from '../components/TModal.vue'
+import VButton from '../components/VButton.vue'
+import VAccordeon from '../components/VAccordeon.vue'
+import VList from '../components/VList.vue'
+import VPage from '../components/VPage.vue'
+import VModal from '../components/VModal.vue'
 
 export default {
 
@@ -129,6 +129,6 @@ export default {
     //   console.log(obj.property)
     // }
   },
-  components: { TButton, TList, TAccordeon, TPage, TModal }
+  components: { VButton, VList, VAccordeon, VPage, VModal }
 }
 </script>

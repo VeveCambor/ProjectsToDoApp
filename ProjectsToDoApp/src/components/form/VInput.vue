@@ -51,7 +51,7 @@
 
 export default {
 
-  name: 'TInput',
+  name: 'VInput',
   props: {
     control: String,
     settings: Object,

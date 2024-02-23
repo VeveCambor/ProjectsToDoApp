@@ -3,7 +3,7 @@
     <template v-if="showHamburger">
       <!-- <t-hamburger v-if="showHamburger" @clicked="onHamburgerClicked"/> -->
       <button @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @click="onHamburgerClicked">
-        <t-icon :icon="{ icon: 'hamburger', color: color }" :width="24" :height="24" />
+        <v-icon :icon="{ icon: 'hamburger', color: color }" :width="24" :height="24" />
       </button>
 
       <transition name="roll-down">
@@ -26,11 +26,11 @@
 <script>
 
 // import THamburger from './THamburger.vue'
-import TIcon from './TIcon.vue'
+import VIcon from './VIcon.vue'
 
 export default {
 
-  name: 'TNavBar',
+  name: 'VNavBar',
   props: {
     links: {
       type: Array,
@@ -64,7 +64,7 @@ export default {
       this.color = '#6fffe9'
     }
   },
-  components: { TIcon }
+  components: { VIcon }
 }
 
 </script>

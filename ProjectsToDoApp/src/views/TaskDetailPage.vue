@@ -1,24 +1,24 @@
 <template>
   <div>
-    <t-page
+    <v-page
       :loading="loading"
       :title="task ? task.task : ''"
     >
       <template v-slot:content>
         <div class="top-buttons">
           <s-button label="edit" @clicked="onEditButtonClicked" />
-          <t-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
-          <t-button label="add person" @clicked="onAddPersonClicked" />
+          <v-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
+          <v-button label="add person" @clicked="onAddPersonClicked" />
         </div>
         <div>
-          <t-list
+          <v-list
             :items="personsToDisplay"
             @clicked="onItemButtonClicked"
           />
         </div>
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showDeleteModal"
       title="confirm delete"
       ok-button-label="delete"
@@ -30,8 +30,8 @@
         <strong>{{ person.last + ' ' + person.first }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
-    <t-modal
+    </v-modal>
+    <v-modal
       :show="showAddPersonModal"
       title="add person"
       ok-button-label="submit"
@@ -40,25 +40,25 @@
       @ok-clicked="addPerson"
     >
       <div>
-        <t-input
+        <v-input
           control="addPerson"
           :settings="addPersonSettings"
           @changed="onAddPersonChanged"
         />
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
 <script>
 
 import db from '../helpers/db.js'
-import TPage from '../components/TPage.vue'
-import TButton from '../components/TButton.vue'
+import VPage from '../components/VPage.vue'
+import VButton from '../components/VButton.vue'
 import SButton from '../components/SButton.vue'
-import TModal from '../components/TModal.vue'
-import TList from '../components/TList.vue'
-import TInput from '../components/form/TInput.vue'
+import VModal from '../components/VModal.vue'
+import VList from '../components/VList.vue'
+import VInput from '../components/form/VInput.vue'
 
 export default {
 
@@ -186,7 +186,7 @@ export default {
       this.personToAdd = payload.value
     }
   },
-  components: { TPage, TButton, TModal, TList, TInput, SButton }
+  components: { VPage, VButton, VModal, VList, VInput, SButton }
 }
 
 </script>

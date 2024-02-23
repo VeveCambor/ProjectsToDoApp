@@ -19,7 +19,7 @@
 <script>
 
 export default {
-  name: 'TAccordeon',
+  name: 'VAccordeon',
   props: {
     title: {
       type: String,

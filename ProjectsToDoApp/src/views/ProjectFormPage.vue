@@ -1,18 +1,18 @@
 <template>
-  <t-page
+  <v-page
     :title="title"
     :loading="loading"
     displayBackButton
   >
     <template v-slot:content>
-      <t-form :settings="settings" v-if="!loading" @submited="onSubmited" />
+      <v-form :settings="settings" v-if="!loading" @submited="onSubmited" />
     </template>
-  </t-page>
+  </v-page>
 </template>
 
 <script>
-import TForm from '../components/form/TForm.vue'
-import TPage from '../components/TPage.vue'
+import VForm from '../components/form/VForm.vue'
+import VPage from '../components/VPage.vue'
 import db from '../helpers/db.js'
 export default {
   name: 'ProjectFormPage',
@@ -63,7 +63,7 @@ export default {
     }
 
   },
-  components: { TForm, TPage }
+  components: { VForm, VPage }
 }
 
 </script>

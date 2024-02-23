@@ -1,5 +1,5 @@
 <template>
-  <t-page
+  <v-page
     title="error"
     :loading="false"
   >
@@ -7,19 +7,19 @@
       <p>{{ errorMessage }}</p>
 
       <div class="back-button-container">
-        <t-button label="home" @clicked="onBtnClicked" />
+        <v-button label="home" @clicked="onBtnClicked" />
       </div>
     </template>
 
-  </t-page>
+  </v-page>
 </template>
 
 
 
 
 <script>
-import TPage from '@/components/TPage.vue'
-import TButton from '@/components/TButton.vue'
+import VPage from '@/components/VPage.vue'
+import VButton from '@/components/VButton.vue'
 export default {
   name: 'ErrorPage',
   computed: {
@@ -33,7 +33,7 @@ export default {
       this.$router.push('/')
     }
   },
-  components: { TPage, TButton }
+  components: { VPage, VButton }
 }
 
 </script>

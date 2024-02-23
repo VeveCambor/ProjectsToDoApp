@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-page
+    <v-page
       title="Tasks"
       addButtonLabel="add task"
       addButtonRedirect="/task-form"
@@ -8,7 +8,7 @@
       img="tasks.png"
     >
       <template v-slot:content>
-        <t-accordeon
+        <v-accordeon
           v-for="task in tasksToDisplay"
           :key="task.id"
           :title="task.task + ' (' + task.project + ')'"
@@ -16,30 +16,30 @@
           <template v-slot:content>
             <div class="task-info-row">
               <div class="task-icon">
-                <t-icon :icon="task.icon" />
+                <v-icon :icon="task.icon" />
               </div>
               <div class="task-date">
                 {{ formatDate(task.date) }}
               </div>
               <div class="page-btn-container tasks-btn-container">
-                <t-button label="detail" small-size @clicked="$router.push('/task/' + task.id)" />
-                <t-button label="edit" small-size @clicked="$router.push('/task-form/' + task.id)" />
-                <t-button v-if="!task.persons.length" label="delete" small-size @clicked="onDeleteClicked(task)" />
+                <v-button label="detail" small-size @clicked="$router.push('/task/' + task.id)" />
+                <v-button label="edit" small-size @clicked="$router.push('/task-form/' + task.id)" />
+                <v-button v-if="!task.persons.length" label="delete" small-size @clicked="onDeleteClicked(task)" />
               </div>
             </div>
-            <t-list :items="task.persons" />
+            <v-list :items="task.persons" />
           </template>
-        </t-accordeon>
+        </v-accordeon>
       </template>
-    </t-page>
-    <t-modal :show="showDeleteModal" title="confirm delete" ok-button-label="delete" cancel-button-label="cancel"
+    </v-page>
+    <v-modal :show="showDeleteModal" title="confirm delete" ok-button-label="delete" cancel-button-label="cancel"
       @close-me="closeDeleteModal" @ok-clicked="deleteTask" @cancel-clicked="closeDeleteModal">
       <div>
         <span>Do you really want to delete task </span>
         <strong>{{ taskToDelete.task }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
@@ -48,12 +48,12 @@
 import db from '../helpers/db.js'
 import { isPast, formatDate } from '../helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
-import TAccordeon from '../components/TAccordeon.vue'
-import TButton from '../components/TButton.vue'
-import TList from '../components/TList.vue'
-import TPage from '../components/TPage.vue'
-import TIcon from '../components/TIcon.vue'
-import TModal from '../components/TModal.vue'
+import VAccordeon from '../components/VAccordeon.vue'
+import VButton from '../components/VButton.vue'
+import VList from '../components/VList.vue'
+import VPage from '../components/VPage.vue'
+import VIcon from '../components/VIcon.vue'
+import VModal from '../components/VModal.vue'
 
 export default {
   name: 'TasksPage',
@@ -122,7 +122,7 @@ export default {
       return formatDate(date)
     }
   },
-  components: { TAccordeon, TButton, TList, TPage, TIcon, TModal }
+  components: { VAccordeon, VButton, VList, VPage, VIcon, VModal }
 }
 
 </script>

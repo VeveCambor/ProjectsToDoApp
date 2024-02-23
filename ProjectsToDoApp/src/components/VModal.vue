@@ -7,15 +7,15 @@
           <div class="modal-header">
             <div class="modal-title">{{ title }}</div>
             <div>
-              <t-button label="X" small-size @clicked="onCloseClicked"/>
+              <v-button label="X" small-size @clicked="onCloseClicked"/>
             </div>
           </div>
           <div class="modal-body">
             <slot></slot>
           </div>
           <div class="modal-footer">
-            <t-button v-if="okButtonDisplay" :label="okButtonLabel" small-size @clicked="onOkClicked"/>
-            <t-button v-if="cancelButtonDisplay" :label="cancelButtonLabel" small-size @clicked="onCancelClicked"/>
+            <v-button v-if="okButtonDisplay" :label="okButtonLabel" small-size @clicked="onOkClicked"/>
+            <v-button v-if="cancelButtonDisplay" :label="cancelButtonLabel" small-size @clicked="onCancelClicked"/>
           </div>
         </div>
       </transition>
@@ -25,9 +25,9 @@
 
 
 <script>
-import TButton from './TButton.vue'
+import VButton from './VButton.vue'
 export default {
-  name: 'TModal',
+  name: 'VModal',
   props: {
     title: {
       type: String
@@ -82,7 +82,7 @@ export default {
       this.showBg = false
     }
   },
-  components: { TButton }
+  components: { VButton }
 }
 
 </script>

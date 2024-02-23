@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-nav-bar :links="navbarLinks" />
+    <v-nav-bar :links="navbarLinks" />
     <error-page v-if="error" />
     <div v-else>
       <!-- <transition name="fadeout"> -->
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import TNavBar from './components/TNavBar.vue'
+import VNavBar from './components/VNavBar.vue'
 import ErrorPage from './views/ErrorPage.vue'
 
 export default {
@@ -37,7 +37,7 @@ export default {
       this.$store.commit('setError', true)
     })
   },
-  components: { TNavBar, ErrorPage }
+  components: { VNavBar, ErrorPage }
 }
 
 </script>

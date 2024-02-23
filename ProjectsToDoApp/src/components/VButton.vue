@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'TButton',
+  name: 'VButton',
   props: {
     smallSize: {
       type: Boolean,

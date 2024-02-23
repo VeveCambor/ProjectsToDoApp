@@ -1,25 +1,25 @@
 <template>
   <div>
-    <t-page
+    <v-page
       :loading="loading"
       :title="person ? person.last + ' ' + person.first + ' (' + person.position + ')' : ''"
     >
       <template v-slot:content>
         <div class="top-buttons">
           <s-button label="edit" @clicked="onEditButtonClicked" />
-          <t-button label="add task" @clicked="onAddTaskClicked" />
-          <t-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
+          <v-button label="add task" @clicked="onAddTaskClicked" />
+          <v-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
         </div>
         <div>
-          <t-list
+          <v-list
             :items="tasksToDisplay"
             display-icons
             @clicked="onItemButtonClicked"
           />
         </div>
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showDeleteModal"
       title="confirm delete"
       ok-button-label="delete"
@@ -32,8 +32,8 @@
         <strong>{{ person.last + ' ' + person.first }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
-    <t-modal
+    </v-modal>
+    <v-modal
       :show="showAddTaskModal"
       title="add task"
       ok-button-label="submit"
@@ -41,12 +41,12 @@
       @cancel-clicked="closeAddTaskModal"
       @ok-clicked="addTask">
       <div>
-        <t-input
+        <v-input
           control="addTask"
           :settings="addTaskSettings"
           @changed="onAddTaskChanged" />
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
@@ -54,12 +54,12 @@
 import db from '@/helpers/db.js'
 import { isPast, formatDate } from '@/helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
-import TPage from '@/components/TPage.vue'
-import TButton from '@/components/TButton.vue'
+import VPage from '@/components/VPage.vue'
+import VButton from '@/components/VButton.vue'
 import SButton from '@/components/SButton.vue'
-import TModal from '@/components/TModal.vue'
-import TList from '@/components/TList.vue'
-import TInput from '@/components/form/TInput.vue'
+import VModal from '@/components/VModal.vue'
+import VList from '@/components/VList.vue'
+import VInput from '@/components/form/VInput.vue'
 
 export default {
   name: 'PersonDetailPage',
@@ -190,7 +190,7 @@ export default {
       })
     }
   },
-  components: { TPage, TButton, TModal, TList, TInput, SButton}
+  components: { VPage, VButton, VModal, VList, VInput, SButton}
 }
 
 </script>

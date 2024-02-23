@@ -1,19 +1,19 @@
 <template>
   <div>
-    <t-page
+    <v-page
       :title="title"
       :loading="loading"
       displayBackButton
     >
       <template v-slot:content>
-        <t-form
+        <v-form
           v-if="!loading"
           :settings="settings"
           @submited="onSubmited"
           @add-new="onAddNew" />
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showAddNewModal"
       title="add position"
       ok-button-label="submit"
@@ -22,24 +22,24 @@
       @ok-clicked="addPosition"
     >
       <div>
-        <t-input
+        <v-input
           control="addNewPosition"
           :settings="addNewPositionSettings"
           @changed="onAddNewPositionChanged"
         />
       </div>
 
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
 <script>
 
 import db from '../helpers/db.js'
-import TForm from '../components/form/TForm.vue'
-import TPage from '../components/TPage.vue'
-import TModal from '../components/TModal.vue'
-import TInput from '../components/form/TInput.vue'
+import VForm from '../components/form/VForm.vue'
+import VPage from '../components/VPage.vue'
+import VModal from '../components/VModal.vue'
+import VInput from '../components/form/VInput.vue'
 export default {
   name: 'PersonFormPage',
   data () {
@@ -129,7 +129,7 @@ export default {
       this.addNewPositionValue = payload.value
     }
   },
-  components: { TForm, TPage, TModal, TInput }
+  components: { VForm, VPage, VModal, VInput }
 }
 
 </script>

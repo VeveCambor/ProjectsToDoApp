@@ -1,32 +1,32 @@
 <template>
   <div>
-    <t-nav-bar :links="navbarLinks" />
+    <v-nav-bar :links="navbarLinks" />
     <error-page v-if="error" />
     <div v-else>
       <transition name="fadeout">
         <router-view />
       </transition>
     </div>
-  <t-page
+  <v-page
     :title="project ? project.project : ''"
     :loading="loading"
   >
       <template v-slot:content>
         <div class="top-buttons">
           <s-button label="edit" @clicked="onEditButtonClicked"/>
-          <t-button label="add task" @clicked="onAddTaskButtonClicked"/>
-          <t-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
+          <v-button label="add task" @clicked="onAddTaskButtonClicked"/>
+          <v-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
         </div>
         <div>
-          <t-list
+          <v-list
             :items="tasksToDisplay"
             display-icons
             @clicked="onItemButtonClicked"
           />
         </div>
       </template>
-    </t-page>
-    <t-modal
+    </v-page>
+    <v-modal
       :show="showDeleteModal"
       title="confirm delete"
       ok-button-label="delete"
@@ -39,7 +39,7 @@
         <strong>{{ project.project }}</strong>
         <span> ?</span>
       </div>
-    </t-modal>
+    </v-modal>
   </div>
 </template>
 
@@ -48,11 +48,11 @@
 import db from '../helpers/db.js'
 import { formatDate, isPast } from '../helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
-import TPage from '../components/TPage.vue'
-import TList from '../components/TList.vue'
-import TButton from '../components/TButton.vue'
+import VPage from '../components/VPage.vue'
+import VList from '../components/VList.vue'
+import VButton from '../components/VButton.vue'
 import SButton from '@/components/SButton.vue'
-import TModal from '../components/TModal.vue'
+import VModal from '../components/VModal.vue'
 
 export default {
   name: 'ProjectDetailPage',
@@ -138,7 +138,7 @@ export default {
       })
     }
   },
-  components: { TPage, TList, TButton, TModal, SButton }
+  components: { VPage, VList, VButton, VModal, SButton }
   /*
     db.get(js4tasks?id=8) // [{id: 8, task: posekat travu}]
     db.get(js4tasks/8) // {id: 8, task: posekat travu}

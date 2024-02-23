@@ -3,7 +3,7 @@
     <!-- items zobrazit v cyklu (tasks, persons, tasks .....) -->
     <li v-for="item in items" :key="item.id">
       <div class="icon" v-if="displayIcons">
-        <t-icon
+        <v-icon
           v-if="item.icon"
           :icon="item.icon"
         />
@@ -13,7 +13,7 @@
         <div class="subtitle">{{ item.subtitle }}</div>
       </div>
       <div class="right">
-        <t-button
+        <v-button
           v-for="button in item.buttons" :key="button"
           :label="button"
           small-size
@@ -24,11 +24,11 @@
   </ul>
 </template>
 <script>
-import TIcon from './TIcon.vue'
-import TButton from './TButton.vue'
+import VIcon from './VIcon.vue'
+import VButton from './VButton.vue'
 
 export default {
-  name: 'TList',
+  name: 'VList',
   props: {
     items: Array, /*
     [
@@ -51,7 +51,7 @@ export default {
       this.$emit('clicked', { button, item })
     }
   },
-  components: { TIcon, TButton }
+  components: { VIcon, VButton }
 }
 
 </script>

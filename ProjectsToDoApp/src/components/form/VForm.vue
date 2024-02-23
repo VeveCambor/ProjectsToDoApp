@@ -1,6 +1,6 @@
 <template>
   <form @submit="onSubmit">
-    <t-modal
+    <v-modal
       :show="showErrorModal"
       title="error"
       :cancel-button-display="false"
@@ -9,10 +9,10 @@
       @ok-clicked="showErrorModal=false"
     >
       <div>The form is not valid.</div>
-    </t-modal>
+    </v-modal>
     <div>
       <div v-for="control in controls" :key="control">
-        <t-input
+        <v-input
           :control="control"
           :settings="settings[control]"
           :error="formData[control].error"
@@ -24,19 +24,19 @@
         />
       </div>
     </div>
-    <t-button class="submit-button" label="submit" btn-type="submit" />
+    <v-button class="submit-button" label="submit" btn-type="submit" />
   </form>
 </template>
 
 <script>
 
 import validator from '../../helpers/validator.js'
-import TInput from './TInput.vue'
-import TButton from '../TButton.vue'
-import TModal from '../TModal.vue'
+import VInput from './VInput.vue'
+import VButton from '../VButton.vue'
+import VModal from '../VModal.vue'
 
 export default {
-  name: 'TForm',
+  name: 'VForm',
   props: {
     settings: Object
   },
@@ -112,7 +112,7 @@ export default {
       this.$emit('add-new', par)
     }
   },
-  components: { TInput, TButton, TModal }
+  components: { VInput, VButton, VModal }
 
 
 }

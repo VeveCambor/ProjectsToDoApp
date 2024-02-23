@@ -20,7 +20,7 @@ import { getIcon } from '@/icons/icons.js';
 
 
 export default {
-  name: 'TIcon',
+  name: 'VIcon',
   props: {
     width: {
       type: Number,

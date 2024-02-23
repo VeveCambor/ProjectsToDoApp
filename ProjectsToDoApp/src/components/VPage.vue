@@ -6,10 +6,10 @@
     <img v-if="img" :src="getImgUrl(img)" :alt="title" />
 
     <div v-if="addButtonLabel" class="page-large-btn-container">
-      <t-button :label="addButtonLabel" @clicked="$router.push(addButtonRedirect)" />
+      <v-button :label="addButtonLabel" @clicked="$router.push(addButtonRedirect)" />
     </div>
 
-    <t-loading v-if="loading" />
+    <v-loading v-if="loading" />
 
     <div v-else>
       <slot name="content"></slot>
@@ -23,12 +23,12 @@
 
 <script>
 
-import TLoading from './TLoading.vue'
-import TButton from './TButton.vue'
+import VLoading from './VLoading.vue'
+import VButton from './VButton.vue'
 import SButton from './SButton.vue'
 
 export default {
-  name: 'TPage',
+  name: 'VPage',
   props: {
     title: String,
     addButtonLabel: String,
@@ -45,7 +45,7 @@ export default {
       return require('../assets/img/' + pic)
     }
   },
-  components: { TLoading, TButton, SButton }
+  components: { VLoading, VButton, SButton }
 }
 
 
