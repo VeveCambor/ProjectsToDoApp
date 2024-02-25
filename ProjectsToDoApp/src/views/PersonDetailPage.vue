@@ -6,7 +6,7 @@
     >
       <template v-slot:content>
         <div class="top-buttons">
-          <s-button label="edit" @clicked="onEditButtonClicked" />
+          <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked" />
           <v-button label="add task" @clicked="onAddTaskClicked" />
           <v-button v-if="!tasks.length" label="delete" @clicked="onDeleteButtonClicked" />
         </div>
@@ -56,7 +56,6 @@ import { isPast, formatDate } from '@/helpers/dateFunctions.js'
 import { sortingTasks } from '@/helpers/sorting.js'
 import VPage from '@/components/VPage.vue'
 import VButton from '@/components/VButton.vue'
-import SButton from '@/components/SButton.vue'
 import VModal from '@/components/VModal.vue'
 import VList from '@/components/VList.vue'
 import VInput from '@/components/form/VInput.vue'
@@ -190,7 +189,7 @@ export default {
       })
     }
   },
-  components: { VPage, VButton, VModal, VList, VInput, SButton}
+  components: { VPage, VButton, VModal, VList, VInput }
 }
 
 </script>

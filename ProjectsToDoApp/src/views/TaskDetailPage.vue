@@ -6,7 +6,7 @@
     >
       <template v-slot:content>
         <div class="top-buttons">
-          <s-button label="edit" @clicked="onEditButtonClicked" />
+          <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked" />
           <v-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
           <v-button label="add person" @clicked="onAddPersonClicked" />
         </div>
@@ -55,7 +55,6 @@
 import db from '../helpers/db.js'
 import VPage from '../components/VPage.vue'
 import VButton from '../components/VButton.vue'
-import SButton from '../components/SButton.vue'
 import VModal from '../components/VModal.vue'
 import VList from '../components/VList.vue'
 import VInput from '../components/form/VInput.vue'
@@ -186,7 +185,7 @@ export default {
       this.personToAdd = payload.value
     }
   },
-  components: { VPage, VButton, VModal, VList, VInput, SButton }
+  components: { VPage, VButton, VModal, VList, VInput }
 }
 
 </script>

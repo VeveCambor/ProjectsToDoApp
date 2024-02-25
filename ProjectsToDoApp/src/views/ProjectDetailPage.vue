@@ -13,7 +13,7 @@
   >
       <template v-slot:content>
         <div class="top-buttons">
-          <s-button label="edit" @clicked="onEditButtonClicked"/>
+          <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked"/>
           <v-button label="add task" @clicked="onAddTaskButtonClicked"/>
           <v-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
         </div>
@@ -51,7 +51,6 @@ import { sortingTasks } from '@/helpers/sorting.js'
 import VPage from '../components/VPage.vue'
 import VList from '../components/VList.vue'
 import VButton from '../components/VButton.vue'
-import SButton from '@/components/SButton.vue'
 import VModal from '../components/VModal.vue'
 
 export default {
@@ -138,7 +137,7 @@ export default {
       })
     }
   },
-  components: { VPage, VList, VButton, VModal, SButton }
+  components: { VPage, VList, VButton, VModal }
   /*
     db.get(js4tasks?id=8) // [{id: 8, task: posekat travu}]
     db.get(js4tasks/8) // {id: 8, task: posekat travu}

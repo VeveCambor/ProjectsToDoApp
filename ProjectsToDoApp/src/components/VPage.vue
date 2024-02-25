@@ -14,7 +14,7 @@
     <div v-else>
       <slot name="content"></slot>
       <div v-if="displayBackButton" class="back-button-container">
-        <s-button label="back" @click="$router.go(-1)" />
+        <v-button label="back" class="btn-second" @click="$router.go(-1)" />
       </div>
     </div>
 
@@ -25,7 +25,6 @@
 
 import VLoading from './VLoading.vue'
 import VButton from './VButton.vue'
-import SButton from './SButton.vue'
 
 export default {
   name: 'VPage',
@@ -45,7 +44,7 @@ export default {
       return require('../assets/img/' + pic)
     }
   },
-  components: { VLoading, VButton, SButton }
+  components: { VLoading, VButton }
 }
 
 
