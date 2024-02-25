@@ -61,7 +61,7 @@ export default {
 
 ul
   list-style-type: none
-  margin: 0
+  margin-top: $margin
   padding: 0
 li
   padding: $list-items-padding

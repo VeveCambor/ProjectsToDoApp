@@ -12,18 +12,20 @@
     :loading="loading"
   >
       <template v-slot:content>
-        <div class="top-buttons">
-          <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked"/>
-          <v-button label="add task" @clicked="onAddTaskButtonClicked"/>
-          <v-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
-        </div>
-        <div>
-          <v-list
-            :items="tasksToDisplay"
-            display-icons
-            @clicked="onItemButtonClicked"
-          />
-        </div>
+        <div class="detail-wrap">
+            <div class="detail-container">
+              <v-list
+                :items="tasksToDisplay"
+                display-icons
+                @clicked="onItemButtonClicked"
+              />
+              <div class="top-buttons">
+                <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked"/>
+                <v-button label="add task" @clicked="onAddTaskButtonClicked"/>
+                <v-button v-if="!tasks.length" label="delete project" @clicked="onDeleteButtonClicked" />
+              </div> 
+            </div>
+          </div>
       </template>
     </v-page>
     <v-modal
@@ -153,4 +155,23 @@ export default {
   gap: 1rem
   justify-content: center
   margin-bottom: $margin
+
+.detail-wrap
+  width: 100vw  
+  width 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: $margin
+
+.detail-container
+  width: 95%
+  height: auto
+  display: flex
+  flex-direction: column
+  gap: $margin
+  border-radius: $border-radius
+  box-shadow: $box-shadow
+  
 </style>

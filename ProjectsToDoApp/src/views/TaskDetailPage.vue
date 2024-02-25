@@ -5,16 +5,20 @@
       :title="task ? task.task : ''"
     >
       <template v-slot:content>
-        <div class="top-buttons">
-          <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked" />
-          <v-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
-          <v-button label="add person" @clicked="onAddPersonClicked" />
-        </div>
-        <div>
-          <v-list
-            :items="personsToDisplay"
-            @clicked="onItemButtonClicked"
-          />
+        <div class="detail-wrap">
+          <div class="detail-container">
+            <div>
+              <v-list
+                :items="personsToDisplay"
+                @clicked="onItemButtonClicked"
+              />
+            </div>
+            <div class="top-buttons">
+              <v-button label="edit" class="btn-second" @clicked="onEditButtonClicked" />
+              <v-button v-if="!persons.length" label="delete" @clicked="onDeleteButtonClicked" />
+              <v-button label="add person" @clicked="onAddPersonClicked" />
+            </div>
+          </div>
         </div>
       </template>
     </v-page>
@@ -196,4 +200,20 @@ export default {
   gap: 1rem
   justify-content: center
   margin-bottom: $margin
+.detail-wrap
+  width: 100vw  
+  width 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: $margin
+.detail-container
+    width: 95%
+    height: auto
+    display: flex
+    flex-direction: column
+    gap: $margin
+    border-radius: $border-radius
+    box-shadow: $box-shadow
 </style>
