@@ -7,7 +7,7 @@
           <div class="modal-header">
             <div class="modal-title">{{ title }}</div>
             <div>
-              <v-button label="X" small-size @clicked="onCloseClicked"/>
+              <v-button class="button-close" label="X" small-size @clicked="onCloseClicked" />
             </div>
           </div>
           <div class="modal-body">
@@ -110,10 +110,12 @@ export default {
 .modal-header
   border-bottom: 1px solid #cdcdcd
   justify-content: space-between
+    
 .modal-footer
   border-top: 1px solid #cdcdcd
-  justify-content: flex-end
+  justify-content: center
   gap: 1rem
+  margin: .5rem 
 .modal-header, .modal-footer
   height: 50px
   display: flex
@@ -144,4 +146,14 @@ export default {
 .modal-2-enter-active, .modal-2-leave-active
   transition: transform 0.3s ease
   transform-origin: top
+.button-close
+  padding: 0
+  background: none
+  border: none
+  font-size: 1.5rem
+  cursor: pointer
+  color: #cdcdcd
+  &:hover
+    color: black
+    box-shadow: none
 </style>
