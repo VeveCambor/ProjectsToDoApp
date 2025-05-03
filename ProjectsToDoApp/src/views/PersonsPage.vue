@@ -67,48 +67,50 @@ export default {
   },
   computed: {
     personsToDisplay () {
-      return this.persons.map(person => {
+      return this.persons?.map(person => {
         return {
           id: person.id,
           fullName: person.last + ' ' + person.first,
           position: person.position,
-          tasks: this.tasks.filter(task => person.id === task.personid).map(task => {
-            let icon = ''
-            let color = ''
-            if(task.completed) {
-              icon = 'check'
-              color = 'green'
-            }
-            else if (isPast(task.date)) {
-              icon = 'warning'
-              color = 'red'
-            }
-            return {
-              id: task.id,
-              header: task.task,
-              subtitle: task.project + ', ' + formatDate(task.date),
-              icon: { icon, color },
-              task: task.task,
-              completed: task.completed,
-              date: task.date
-            }
-          }).sort(sortingTasks)
+          tasks: this.tasks
+            ?.filter(task => person.id === task.personid)
+            ?.map(task => {
+              let icon = task.completed ? 'check' : isPast(task.date) ? 'warning' : 'clock'
+              return {
+                id: task.id,
+                header: task.task,
+                subtitle: task.project + ', ' + formatDate(task.date),
+                icon,
+                task: task.task,
+                completed: task.completed,
+                date: task.date
+              }
+            })
+            ?.sort(sortingTasks) || []
         }
-      }).sort((a, b) => a.fullName.localeCompare(b.fullName))
+      })?.sort((a, b) => a.fullName.localeCompare(b.fullName)) || []
     }
   },
-  created () {
-    this.fetchData()
+  async created () {
+    console.log('PersonsPage created')
+    try {
+      console.log('Načítám osoby...')
+      this.persons = await db.get('js4persons') || []
+      console.log('Osoby načteny:', this.persons)
+      
+      console.log('Načítám úkoly osob...')
+      this.tasks = await db.get('js4personstasks') || []
+      console.log('Úkoly osob načteny:', this.tasks)
+      
+      this.loading = false
+    } catch (error) {
+      console.error('Chyba při načítání dat:', error)
+      this.$store.commit('setError', true)
+      this.$store.commit('setErrorMessage', 'Chyba při načítání dat.')
+      this.loading = false
+    }
   },
   methods: {
-    fetchData () {
-      Promise.all([
-        db.get('js4persons').then((persons) => { this.persons = persons }),
-        db.get('js4personstasks').then(tasks => { this.tasks = tasks })
-      ]).then(() => {
-        this.loading = false
-      })
-    },
     onDeleteClicked (person) {
       this.personToDelete = person
       this.showDeleteModal = true

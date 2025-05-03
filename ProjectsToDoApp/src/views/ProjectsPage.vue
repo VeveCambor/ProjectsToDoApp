@@ -60,7 +60,6 @@ export default {
   data () {
     return {
       projects: [],
-      tasks: [],
       loading: true,
       showDeleteModal: false,
       projectToDelete: {}
@@ -68,34 +67,34 @@ export default {
   },
   computed: {
     projectsToDisplay () {
-      return this.projects.map(project => {
-        return Object.assign(
-          {
-            tasks: this.tasks.filter(task => project.id === task.projectid).map(item => {
-              let icon = ''
-              if (item.completed) {
-                icon = { icon: 'check', color: 'green' }
-              } else if (isPast(item.date)) {
-                icon = { icon: 'warning', color: 'red' }
-              }
-              return {
-                id: item.id,
-                header: item.task,
-                subtitle: formatDate(item.date),
-                icon,
-                completed: item.completed,
-                task: item.task,
-                date: item.date
-              }
-            }).sort(sortingTasks)
-          },
-          project
-        )
-      }).sort((a, b) => a.project.localeCompare(b.project))
+      return this.projects?.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks?.map(task => {
+            return {
+              ...task,
+              icon: task.completed ? 'check' : isPast(task.date) ? 'warning' : 'clock',
+              label: task.task + ' (' + formatDate(task.date) + ')'
+            }
+          }) || []
+        }
+      }) || []
     }
   },
-  created () {
-    this.fetchData()
+  async created () {
+    console.log('ProjectsPage created')
+    try {
+      console.log('Načítám projekty...')
+      this.projects = await db.get('js4projects') || []
+      console.log('Projekty načteny:', this.projects)
+      
+      this.loading = false
+    } catch (error) {
+      console.error('Chyba při načítání dat:', error)
+      this.$store.commit('setError', true)
+      this.$store.commit('setErrorMessage', 'Chyba při načítání dat.')
+      this.loading = false
+    }
   },
   methods: {
     onDeleteClicked (project) { // { project: 'zahrada', id: 1, tasks: [] }

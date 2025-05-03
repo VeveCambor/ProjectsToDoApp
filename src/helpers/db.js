@@ -1,9 +1,8 @@
 import axios from 'axios'
-import store from '../store/index.js'
-
 axios.defaults.baseURL = 'https://sdaapi.glabazna.eu'
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 axios.defaults.headers.common.Accept = 'json'
+import store from '../store/index.js'
 
 const checkUrl = (url) => {
   return url.substr(0, 1) === '/' ? url : '/' + url
@@ -57,4 +56,4 @@ export default {
       store.commit('setError', true)
     })
   }
-}
+} 

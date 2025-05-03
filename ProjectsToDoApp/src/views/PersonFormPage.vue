@@ -92,6 +92,11 @@ export default {
   methods: {
     fetchPositions () {
       return db.get('js4positions').then((positions) => {
+        if (!positions) {
+          console.error('Nepodařilo se načíst pozice')
+          this.settings.positionid.options = [{ value: '', label: '' }]
+          return
+        }
         this.settings.positionid.options = positions.map(position => {
           return {
             value: position.id,

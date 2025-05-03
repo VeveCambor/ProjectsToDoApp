@@ -68,41 +68,46 @@ export default {
   },
   computed: {
     tasksToDisplay () {
-      return this.tasks.map(task => {
-        let icon = ''
-        let color = ''
-        if (task.completed) {
-          icon = 'check'
-          color= 'green'
-        } else if (isPast(task.date)) {
-          icon = 'warning'
-          color = 'red'
-        }
+      return this.tasks?.map(task => {
+        let icon = task.completed ? 'check' : isPast(task.date) ? 'warning' : 'clock'
         const persons = this.persons
-          .filter(person => task.id === person.taskid)
-          .map(person => {
+          ?.filter(person => task.id === person.taskid)
+          ?.map(person => {
             return {
               id: person.id,
               header: person.last + ' ' + person.first,
               subtitle: person.position
             }
           })
-          .sort((a, b) => a.header.localeCompare(b.header))
-        return Object.assign(task, { icon: { icon, color } }, { persons })
-      }).sort(sortingTasks)
+          ?.sort((a, b) => a.header.localeCompare(b.header)) || []
+        return {
+          ...task,
+          icon,
+          persons
+        }
+      })?.sort(sortingTasks) || []
     }
   },
-  created () {
-    this.fetchData()
+  async created () {
+    console.log('TasksPage created')
+    try {
+      console.log('Načítám úkoly...')
+      this.tasks = await db.get('js4tasks') || []
+      console.log('Úkoly načteny:', this.tasks)
+      
+      console.log('Načítám osoby...')
+      this.persons = await db.get('js4personstasks') || []
+      console.log('Osoby načteny:', this.persons)
+      
+      this.loading = false
+    } catch (error) {
+      console.error('Chyba při načítání dat:', error)
+      this.$store.commit('setError', true)
+      this.$store.commit('setErrorMessage', 'Chyba při načítání dat.')
+      this.loading = false
+    }
   },
   methods: {
-    fetchData () {
-      const promises = [
-        db.get('js4tasks').then(tasks => { this.tasks = tasks }),
-        db.get('js4personstasks').then(persons => { this.persons = persons })
-      ]
-      Promise.all(promises).then(() => { this.loading = false })
-    },
     onDeleteClicked (task) {
       this.taskToDelete = task
       this.showDeleteModal = true

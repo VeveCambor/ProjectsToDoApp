@@ -55,41 +55,48 @@ export default {
   },
   computed: {
     numberOfProjects () {
-      return this.projects.length
+      return this.projects?.length || 0
     },
     numberOfTasks () {
-      return this.tasks.length
+      return this.tasks?.length || 0
     },
     numberOfCompleted () {
-      return this.tasks.filter(task => task.completed).length
+      return this.tasks?.filter(task => task.completed).length || 0
     },
     numberOfUncompleted () {
       return this.numberOfTasks - this.numberOfCompleted
     },
     numberOfOverDue () {
-      return this.tasks.reduce((acc, cur) => {
-        return acc + !cur.completed && isPast(cur.date) ? 1 : 0
-      })
+      return this.tasks?.reduce((acc, cur) => {
+        return acc + (!cur.completed && isPast(cur.date) ? 1 : 0)
+      }, 0) || 0
     },
     numberOfPersons () {
-      return this.persons.length
+      return this.persons?.length || 0
     }
   },
-  created () {
-    const promises = [
-      db.get('js4projects').then((projects) => {
-        this.projects = projects
-      }),
-      db.get('js4tasks').then((tasks) => {
-        this.tasks = tasks
-      }),
-      db.get('js4persons').then((persons) => {
-        this.persons = persons
-      })
-    ]
-    Promise.all(promises).then(() => {
+  async created () {
+    console.log('WelcomePage created')
+    try {
+      console.log('Načítám projekty...')
+      this.projects = await db.get('js4projects') || []
+      console.log('Projekty načteny:', this.projects)
+      
+      console.log('Načítám úkoly...')
+      this.tasks = await db.get('js4tasks') || []
+      console.log('Úkoly načteny:', this.tasks)
+      
+      console.log('Načítám osoby...')
+      this.persons = await db.get('js4persons') || []
+      console.log('Osoby načteny:', this.persons)
+      
       this.loading = false
-    })
+    } catch (error) {
+      console.error('Chyba při načítání dat:', error)
+      this.$store.commit('setError', true)
+      this.$store.commit('setErrorMessage', 'Chyba při načítání dat.')
+      this.loading = false
+    }
   },
   components: { VPage }
 }

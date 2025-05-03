@@ -60,9 +60,13 @@ export default {
   data () {
     return {
       project: null,
+      tasks: [],
       loading: true,
-      tasks: null,
-      showDeleteModal: false
+      showDeleteModal: false,
+      navbarLinks: [
+        { label: 'projects', path: '/projects' },
+        { label: 'tasks', path: '/tasks' }
+      ]
     }
   },
   computed: {
@@ -70,42 +74,35 @@ export default {
       return this.$route.params.id
     },
     tasksToDisplay () {
-      return this.tasks.map(task => {
-        let icon = ''
-        let color = ''
-        const buttons = [task.completed ? 'undone' : 'done', 'edit']
-        if (task.completed) {
-          icon = 'check',
-          color = 'green'
-        } else if (isPast(task.date)) {
-          icon = 'warning',
-          color = 'red'
-        }
+      return this.tasks?.map(task => {
         return {
-          id: task.id,
-          header: task.task,
-          subtitle: formatDate(task.date),
-          icon: { icon, color },
-          buttons,
-          task: task.task,
-          completed: task.completed,
-          date: task.date
+          ...task,
+          icon: task.completed ? 'check' : isPast(task.date) ? 'warning' : 'clock',
+          label: task.task + ' (' + formatDate(task.date) + ')'
         }
-      }).sort(sortingTasks)
+      }) || []
     }
   },
-  created () {
-    const promises = [
-      db.get('js4projects/' + this.projectid).then((record) => {
-        this.project = record
-      }),
-      db.get('js4tasks?projectid=' + this.projectid).then((tasks) => {
-        this.tasks = tasks
-      })
-    ]
-    Promise.all(promises).then(() => {
+  async created () {
+    console.log('ProjectDetailPage created')
+    try {
+      console.log('Načítám projekt...')
+      const projectId = this.$route.params.id
+      this.project = await db.get(`js4projects/${projectId}`)
+      console.log('Projekt načten:', this.project)
+      
+      console.log('Načítám úkoly...')
+      this.tasks = await db.get('js4tasks') || []
+      this.tasks = this.tasks.filter(task => task.projectid === projectId)
+      console.log('Úkoly načteny:', this.tasks)
+      
       this.loading = false
-    })
+    } catch (error) {
+      console.error('Chyba při načítání dat:', error)
+      this.$store.commit('setError', true)
+      this.$store.commit('setErrorMessage', 'Chyba při načítání dat.')
+      this.loading = false
+    }
   },
   methods: {
     onItemButtonClicked (payload) {
