@@ -26,17 +26,7 @@ Then working with the database, form, accordion and modal.
 
 
 
-
-
-
-We did the application as a final project in Software Development Academy. 
-
-I worked on it with one another student and the trainer helped us improve the code.
-
-The whole design of the app and some parts of the code is my own work. 
-
-
-
+I create this application as a final project in Software Development Academy.  
 
 
 
